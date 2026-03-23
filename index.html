@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nicolas & Yuting</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <header class="hero">
+      <p class="label">we'll be together again in</p>
+      <div class="countdown" id="countdown">
+        <div class="unit">
+          <span class="number" id="days">--</span>
+          <span class="unit-label">days</span>
+        </div>
+        <div class="sep">:</div>
+        <div class="unit">
+          <span class="number" id="hours">--</span>
+          <span class="unit-label">hours</span>
+        </div>
+        <div class="sep">:</div>
+        <div class="unit">
+          <span class="number" id="minutes">--</span>
+          <span class="unit-label">minutes</span>
+        </div>
+        <div class="sep">:</div>
+        <div class="unit">
+          <span class="number" id="seconds">--</span>
+          <span class="unit-label">seconds</span>
+        </div>
+      </div>
+      <p class="sublabel" id="arrival-date"></p>
+    </header>
+
+  </div>
+
+  <script>
+    // ← CHANGE THIS DATE : year, month (0=jan, 6=july), day
+    const TARGET = new Date(2025, 6, 1);
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function update() {
+      const now  = new Date();
+      const diff = TARGET - now;
+
+      if (diff <= 0) {
+        document.getElementById('countdown').innerHTML =
+          '<p class="arrived">She\'s here!</p>';
+        return;
+      }
+
+      const days    = Math.floor(diff / 86400000);
+      const hours   = Math.floor((diff % 86400000) / 3600000);
+      const minutes = Math.floor((diff % 3600000)  / 60000);
+      const seconds = Math.floor((diff % 60000)    / 1000);
+
+      document.getElementById('days').textContent    = days;
+      document.getElementById('hours').textContent   = pad(hours);
+      document.getElementById('minutes').textContent = pad(minutes);
+      document.getElementById('seconds').textContent = pad(seconds);
+    }
+
+    // Display arrival date in plain text
+    document.getElementById('arrival-date').textContent =
+      TARGET.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    update();
+    setInterval(update, 1000);
+  </script>
+
+</body>
+</html>
