@@ -2,44 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>Nicolas & Yuting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
 
+  <!-- hand-drawn cloud decorations -->
+  <svg class="cloud cloud-1" viewBox="0 0 120 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 35 Q15 10 35 15 Q40 2 60 10 Q75 0 85 12 Q105 5 110 25 Q115 40 90 38 Q70 45 50 40 Q30 45 10 35Z" stroke="var(--ink)" stroke-width="1.5" fill="var(--cloud)" />
+  </svg>
+  <svg class="cloud cloud-2" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 28 Q12 8 28 12 Q34 2 50 8 Q62 0 72 10 Q88 4 92 20 Q96 32 75 30 Q58 36 42 32 Q24 37 8 28Z" stroke="var(--ink)" stroke-width="1.5" fill="var(--cloud)" />
+  </svg>
+  <svg class="cloud cloud-3" viewBox="0 0 90 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 25 Q10 7 25 11 Q30 2 44 7 Q55 0 63 9 Q78 4 82 18 Q85 28 67 27 Q52 32 37 28 Q20 33 7 25Z" stroke="var(--ink)" stroke-width="1.5" fill="var(--cloud)" />
+  </svg>
+
   <div class="app">
 
+    <!-- zigzag decoration (Charlie Brown's shirt pattern) -->
+    <div class="zigzag-top" aria-hidden="true">
+      <svg viewBox="0 0 400 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="0,18 20,4 40,18 60,4 80,18 100,4 120,18 140,4 160,18 180,4 200,18 220,4 240,18 260,4 280,18 300,4 320,18 340,4 360,18 380,4 400,18"
+          fill="none" stroke="var(--zigzag-color)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+
     <header class="hero">
+      <h1 class="names">Nicolas & Yuting</h1>
       <p class="label">we'll be together again in</p>
+
       <div class="countdown" id="countdown">
         <div class="unit">
-          <span class="number" id="days">--</span>
+          <div class="number-box">
+            <span class="number" id="days">--</span>
+          </div>
           <span class="unit-label">days</span>
         </div>
         <div class="sep">:</div>
         <div class="unit">
-          <span class="number" id="hours">--</span>
+          <div class="number-box">
+            <span class="number" id="hours">--</span>
+          </div>
           <span class="unit-label">hours</span>
         </div>
         <div class="sep">:</div>
         <div class="unit">
-          <span class="number" id="minutes">--</span>
+          <div class="number-box">
+            <span class="number" id="minutes">--</span>
+          </div>
           <span class="unit-label">minutes</span>
         </div>
         <div class="sep">:</div>
         <div class="unit">
-          <span class="number" id="seconds">--</span>
+          <div class="number-box">
+            <span class="number" id="seconds">--</span>
+          </div>
           <span class="unit-label">seconds</span>
         </div>
       </div>
+
       <p class="sublabel" id="arrival-date"></p>
     </header>
+
+    <!-- little heart doodle -->
+    <div class="heart-doodle" aria-hidden="true">
+      <svg viewBox="0 0 60 55" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30 50 C30 50 5 35 5 18 C5 8 15 2 23 6 Q27 8 30 14 Q33 8 37 6 C45 2 55 8 55 18 C55 35 30 50 30 50Z"
+          fill="var(--heart)" stroke="var(--ink)" stroke-width="1.8" />
+      </svg>
+    </div>
+
+    <!-- zigzag bottom -->
+    <div class="zigzag-bottom" aria-hidden="true">
+      <svg viewBox="0 0 400 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="0,4 20,18 40,4 60,18 80,4 100,18 120,4 140,18 160,4 180,18 200,4 220,18 240,4 260,18 280,4 300,18 320,4 340,18 360,4 380,18 400,4"
+          fill="none" stroke="var(--zigzag-color)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+
+    <!-- navigation placeholder for future pages -->
+    <nav class="nav-dots" aria-label="Pages">
+      <a href="#" class="nav-dot active" title="Countdown"></a>
+      <a href="#" class="nav-dot" title="Quiz (coming soon)"></a>
+      <a href="#" class="nav-dot" title="Trip map (coming soon)"></a>
+    </nav>
 
   </div>
 
   <script>
-    // ← CHANGE THIS DATE : year, month (0=jan, 6=july), day
+    // Target date: July 22, 2026
     const TARGET = new Date(2026, 6, 22);
 
     function pad(n) { return String(n).padStart(2, '0'); }
@@ -50,7 +108,7 @@
 
       if (diff <= 0) {
         document.getElementById('countdown').innerHTML =
-          '<p class="arrived">She\'s here!</p>';
+          '<p class="arrived">She\'s here! ♥</p>';
         return;
       }
 
@@ -65,7 +123,7 @@
       document.getElementById('seconds').textContent = pad(seconds);
     }
 
-    // Display arrival date in plain text
+    // Display arrival date
     document.getElementById('arrival-date').textContent =
       TARGET.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
